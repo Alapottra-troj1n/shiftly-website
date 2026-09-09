@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/*
+  Shiftly AI — the marketing site.
+
+  The palette, type and washes below are lifted from the app
+  (../shiftly/app/globals.css) so a visitor who signs up does not walk into a
+  different-looking product. They are copied rather than shared on purpose:
+  the two are separate deployments with separate release cadences, and a
+  landing page that changes weekly should not be able to break the app.
+
+  If a token changes in the app, change it here too. The app is the source of
+  truth for anything that appears in both — it is the thing people use every
+  day, and it has an accessibility bar written down (WCAG 2.2 AA) that the
+  marketing site should not undercut.
+
+  What is deliberately NOT copied: the app's component styles, its shell, its
+  layout rules. A marketing page wants big type and air; the app wants dense,
+  functional screens read one-handed mid-shift. Same family, different job.
+*/
+
+@theme {
+  /* Grounds */
+  --color-canvas: #fcfbf7;
+  --color-surface: #ffffff;
+  --color-muted: #f4f4f1;
+  --color-muted-deep: #ecece8;
+
+  /* Ink */
+  --color-ink: #121214;
+  --color-ink-soft: #5b5b64;
+  --color-ink-faint: #6b6b74;
+
+  /* Brand: a warm, friendly violet */
+  --color-brand: #6d4df0;
+  --color-brand-deep: #4a2fbd;
+  --color-brand-soft: #efeaff;
+
+  /* Status. Each tint pairs with an ink that clears AA on it. */
+  --color-good: #146c43;
+  --color-good-soft: #dcf3e6;
+  --color-warn: #8a4f0d;
+  --color-warn-soft: #ffeeda;
+  --color-info: #3b3fb0;
+  --color-info-soft: #e8e9ff;
+  --color-quiet: #5b5b64;
+  --color-quiet-soft: #f0f0ed;
+  --color-alarm: #a8321a;
+  --color-alarm-soft: #ffe7e1;
+
+  /* Lines */
+  --color-line: #ecece7;
+  --color-line-strong: #dcdcd6;
+
+  --font-sans: var(--font-figtree);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-card: 0 1px 2px rgba(18, 18, 20, 0.04);
+  --shadow-raised: 0 10px 28px -14px rgba(18, 18, 20, 0.22);
+  --shadow-pop: 0 18px 44px -18px rgba(18, 18, 20, 0.3);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  The assistant's own two stops. In the app these mark the one section that
+  thinks; here they are the natural accent for anything about "you can ask it
+  instead of clicking it", which is half the product's position.
+*/
+:root {
+  --ai-from: #6d4df0;
+  --ai-to: #c33172;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ==================== the washes ==================== */
+
+/*
+  Atmosphere, not decoration with meaning. Three stops, 135deg, tinting the
+  same three hues the brand sits between. Used as section grounds and card
+  backgrounds — never behind body copy small enough that contrast gets tight.
+*/
+
+.wash-warm {
+  background-image: linear-gradient(135deg, #fff2e8 0%, #ffeaf3 46%, #eee9ff 100%);
+}
+
+.wash-cool {
+  background-image: linear-gradient(135deg, #eaf1ff 0%, #f1eaff 52%, #ffeaf3 100%);
+}
+
+/* Saturated: for a filled button or a dark section, with white ink on it. */
+.wash-brand {
+  background-image: linear-gradient(135deg, #6d4df0 0%, #8b5cf0 52%, #c86ae0 100%);
+}
+
+/* The assistant's line. Two stops, because a third muddies at small sizes. */
+.wash-ai {
+  background-image: linear-gradient(135deg, var(--ai-from) 0%, var(--ai-to) 100%);
+}
+
+/*
+  Gradient text. In the app this is used exactly once, on the entry headline.
+  Here it earns a little more room — a hero headline is the marketing
+  equivalent — but the rule holds: one moment per screen, never a paragraph.
+  Every stop clears 3:1 on the canvas at large-text size.
+*/
+.text-wash {
+  background-image: linear-gradient(96deg, #bf5615 0%, #c33172 48%, #5a37d6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==================== motion ==================== */
+
+/* One soft entrance, reused. Matches the app's `.rise`. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.45s var(--ease-soft) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

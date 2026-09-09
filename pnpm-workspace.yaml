@@ -1,0 +1,5 @@
+# Same as the app's: these two have no build step worth running, and left
+# unlisted pnpm warns about them on every install.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
