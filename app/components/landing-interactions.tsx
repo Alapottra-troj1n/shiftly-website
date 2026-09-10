@@ -15,8 +15,13 @@ import { Brand, Mascot } from "./mascot";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [logoGreeting, setLogoGreeting] = useState(true);
   const menuButton = useRef<HTMLButtonElement>(null);
   const nav = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const greeting = window.setTimeout(() => setLogoGreeting(false), 1100);
+    return () => window.clearTimeout(greeting);
+  }, []);
   useEffect(() => {
     if (!open) return;
     const close = (event: globalThis.KeyboardEvent) => {
@@ -38,7 +43,13 @@ export function Header() {
   return (
     <header className="site-header" ref={nav}>
       <div className="nav-inner container">
-        <Link className="brand-link" href="/" aria-label="Shiftly AI home"><Brand /></Link>
+        <Link
+          className={`brand-link${logoGreeting ? " logo-greeting" : ""}`}
+          href="/"
+          aria-label="Shiftly AI home"
+        >
+          <Brand />
+        </Link>
         <nav
           className={`main-nav ${open ? "is-open" : ""}`}
           id="main-nav"
