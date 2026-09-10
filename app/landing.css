@@ -2458,7 +2458,6 @@ a {
 .brand-wordmark .shiftly-mascot { width: 43px; height: 43px; flex-shrink: 0; }
 .shiftly-mascot { overflow: visible; transform-origin: 50% 80%; }
 .mascot-eyes { transform-box: fill-box; transform-origin: center; animation: shiftly-blink 7s ease-in-out infinite; }
-.brand-link.logo-greeting .shiftly-mascot { animation: shiftly-greeting .65s ease-in-out .3s; }
 .brand-link:hover .shiftly-mascot, .brand-link:focus-visible .shiftly-mascot, .assistant-avatar:hover .shiftly-mascot { animation: shiftly-greeting .65s ease-in-out; }
 .assistant-avatar { background: none; width: 44px; height: 44px; flex-shrink: 0; }
 .assistant-avatar .shiftly-mascot { width: 44px; height: 44px; }
