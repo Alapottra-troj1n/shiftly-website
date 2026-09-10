@@ -2542,6 +2542,99 @@ a {
   .brand-wordmark { font-size: 19px; }
   .brand-wordmark .shiftly-mascot { width: 31px; height: 31px; }
 }
+/* Grow the composition beyond laptop widths, with a bounded reading measure.
+   At the cap, the lossless 2880px desktop capture renders at 1440 CSS pixels. */
+@media (min-width: 1600px) {
+  .container {
+    width: min(1504px, calc(50vw + 400px));
+  }
+  .section {
+    padding-block: 120px;
+  }
+  .hero {
+    min-height: clamp(640px, 40vw, 760px);
+    padding-block: 100px;
+  }
+  .hero h1 {
+    font-size: clamp(74px, 4.625vw, 90px);
+  }
+  .hero-description {
+    max-width: 490px;
+    font-size: 20px;
+  }
+  .hero-art {
+    width: min(48vw, 960px);
+    height: auto;
+    aspect-ratio: 3 / 2;
+    top: 40px;
+    right: -40px;
+  }
+  .hero-note,
+  .capture-note {
+    font-size: 13px;
+  }
+  .main-nav a,
+  .sign-in,
+  .hero-actions .text-link {
+    font-size: 15px;
+  }
+  .button {
+    font-size: 16px;
+  }
+  .button-small {
+    font-size: 14px;
+  }
+  .eyebrow,
+  .faq-section .eyebrow {
+    font-size: 12px;
+  }
+  .section-heading h2 {
+    font-size: clamp(47px, 3vw, 56px);
+  }
+  .section-heading > p:not(.eyebrow),
+  .section-lead {
+    font-size: 19px;
+    max-width: 510px;
+  }
+  .centered > p:not(.eyebrow) {
+    max-width: 720px;
+  }
+  .features-intro .section-lead {
+    max-width: 430px;
+  }
+  .feature-grid {
+    gap: 28px;
+  }
+  .feature-card {
+    padding: 34px 32px 24px;
+  }
+  .feature-card h3 {
+    font-size: 30px;
+  }
+  .feature-card > p,
+  .tour-caption p,
+  .hours-benefits > span {
+    font-size: 16px;
+  }
+  .tour-caption h3 {
+    font-size: 24px;
+  }
+  .tour-caption p {
+    max-width: 800px;
+  }
+  /* Keep text and hairline borders aligned with the display's pixel grid. */
+  .decision-visual,
+  .hours-card {
+    transform: none;
+  }
+  .preview-dialog {
+    width: min(1800px, 95vw);
+  }
+  .faq-section {
+    padding-top: 48px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

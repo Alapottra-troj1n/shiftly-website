@@ -119,7 +119,8 @@ export default function Home() {
               width={1536}
               height={1024}
               preload
-              sizes="(max-width: 700px) 100vw, 780px"
+              quality={90}
+              sizes="(max-width: 700px) 125vw, (max-width: 900px) 545px, (max-width: 1100px) 630px, (max-width: 1449px) 730px, (max-width: 1599px) 765px, (max-width: 2000px) 48vw, 960px"
             />
             <div className="art-note">
               <span className="note-stroke" aria-hidden="true" /> All the little
@@ -368,6 +369,7 @@ export default function Home() {
                   width={1280}
                   height={1280}
                   sizes="180px"
+                  quality={90}
                 />
                 <span>
                   Meet Shiftly.
