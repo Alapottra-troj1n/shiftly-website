@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL } from "./lib/seo";
 import "./globals.css";
 
 /*
@@ -13,32 +14,21 @@ const figtree = localFont({
   display: "swap",
 });
 
-const SITE = "https://joinshiftly.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Shiftly AI — Your whole shift. In one place.",
+    default: HOME_TITLE,
     template: "%s · Shiftly AI",
   },
-  description:
-    "Plan the roster, keep tasks and logs with each shift, and track the hours. A warmer working day for cafés, bars and independent shops. Just ask Shiftly AI.",
-  openGraph: {
-    type: "website",
-    siteName: "Shiftly AI",
-    url: SITE,
-    title: "Shiftly AI — Your whole shift. In one place.",
-    description:
-      "A clear plan for you. A clear day for your team. Rosters, tasks, logs and hours, together with a helping hand from AI.",
-  },
-  twitter: { card: "summary_large_image" },
+  description: HOME_DESCRIPTION,
+  applicationName: SITE_NAME,
   icons: {
     icon: [
-      { url: "/brand/app-icon-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/brand/app-icon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/brand/mark-primary.svg", type: "image/svg+xml" },
+      { url: "/brand/shiftly-icon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/brand/shiftly-icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/shiftly.svg", type: "image/svg+xml" },
     ],
-    apple: "/brand/app-icon-180.png",
+    apple: "/brand/shiftly-icon-180.png",
   },
 };
 
@@ -52,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={figtree.variable}>
+    <html lang="en" className={figtree.variable} data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

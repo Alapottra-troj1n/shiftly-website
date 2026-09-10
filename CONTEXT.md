@@ -96,16 +96,25 @@ one-handed mid-shift. Same family, different job.
 
 The supplied September 2026 brand kit is now used on the landing page:
 
-- `public/brand/`: the folded-card logo, app icons, Sunny and the connected-shift
+- `public/brand/`: Shiftly mascot logo, app icons and the connected-shift
   illustration. Favicons and the apple-touch icon are wired in `app/layout.tsx`.
 - `public/screenshots/`: five supplied product captures, shown as example venue data.
 - `app/landing.css`: marketing-only Paper, Ink and Dawn surfaces from the brand guide.
   Shared app tokens remain in `app/globals.css` without changes.
 - `app/components/landing-interactions.tsx`: the product tour, screenshot viewer,
   example checklist, scripted Assistant examples and reduced-motion-aware reveals.
+- The product tour uses original, lossless screenshots only. It defaults to the
+  phone capture on small screens, with a device switch and an enlarged viewer.
+  Do not replace it with a simplified reconstruction of the product.
+- `app/components/mascot.tsx`: the supplied mascot SVG with subtle blinking and
+  greeting motion; all motion respects the reduced-motion preference.
+- `/pricing`: a single US$10 per venue/month plan (working billing-unit assumption,
+  pending owner confirmation). No trial or unlimited Assistant allowance is promised.
 
-The full marketing wordmark is **Shiftly AI**. Sunny is the Assistant companion,
-not the logo. Illustrations add atmosphere; product captures demonstrate the UI.
+The full marketing wordmark is **Shiftly AI**. By owner request, the mascot is now
+named **Shiftly** and serves as both the site logo and the Assistant companion.
+Use the supplied `sunny-ready.svg` geometry (`shiftly.svg` is its named brand copy).
+Illustrations add atmosphere; product captures demonstrate the UI.
 The sibling product repository remains read-only; its branding has not been changed.
 
 Signup links use `https://app.joinshiftly.com/sign-up`; sign-in links use

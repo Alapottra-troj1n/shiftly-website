@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL, pageMetadata } from "./lib/seo";
+import { Brand } from "./components/mascot";
 import {
   AssistantDemo,
   Header,
@@ -10,6 +13,32 @@ import { Arrow, Icon } from "./components/icons";
 import "./landing.css";
 
 const SIGN_UP = "https://app.joinshiftly.com/sign-up";
+export const metadata = {
+  ...pageMetadata(HOME_TITLE, HOME_DESCRIPTION, "/"),
+  title: { absolute: HOME_TITLE },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/shiftly-icon-180.png`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: HOME_DESCRIPTION,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
 const questions = [
   {
     question: "Who is Shiftly AI for?",
@@ -34,13 +63,17 @@ const questions = [
   {
     question: "What does joining early mean?",
     answer:
-      "Shiftly AI is pre-launch. You can create a venue account to explore the product as it develops. Pricing and launch plans are still being finalised; there are no published trial or pricing terms yet.",
+      "Shiftly AI is pre-launch. You can create a venue account to explore the product as it develops. The plan is US$10 per venue, per month. See the pricing page for what is included.",
   },
 ];
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+      />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -50,7 +83,7 @@ export default function Home() {
           <div className="hero-copy">
             <div className="eyebrow hero-eyebrow">
               <span className="tiny-sun" aria-hidden="true">
-                ✳
+                <Icon name="sun" />
               </span>{" "}
               A warmer working day
             </div>
@@ -331,14 +364,14 @@ export default function Home() {
               <div className="sunny-introduction">
                 <Image
                   src="/brand/sunny-studio.png"
-                  alt="Sunny, the smiling peach and lilac folded shift card."
+                  alt="Shiftly, the smiling peach and lilac folded shift card."
                   width={1280}
                   height={1280}
                   sizes="180px"
                 />
                 <span>
-                  A little help.
-                  <br />A warmer day.
+                  Meet Shiftly.
+                  <br />Your little helping hand.
                   <span className="sunny-underline" aria-hidden="true" />
                 </span>
               </div>
@@ -461,7 +494,7 @@ export default function Home() {
         >
           <Reveal className="founding-card">
             <span className="founding-symbol" aria-hidden="true">
-              ✳
+              <Icon name="sun" />
             </span>
             <p className="eyebrow">Small venues. A new beginning.</p>
             <h2 id="join-title">
@@ -484,14 +517,7 @@ export default function Home() {
       </main>
       <footer className="site-footer container">
         <div className="footer-top">
-          <a href="#" aria-label="Shiftly AI home">
-            <Image
-              src="/brand/lockup-primary.svg"
-              alt="Shiftly AI"
-              width={175}
-              height={43}
-            />
-          </a>
+          <Link href="/" aria-label="Shiftly AI home"><Brand /></Link>
           <p>A little more together. A little less to chase.</p>
           <a href="https://app.joinshiftly.com/sign-in" className="text-link">
             Sign in <Arrow />
@@ -499,6 +525,7 @@ export default function Home() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Shiftly AI</span>
+          <Link href="/pricing#top">Pricing</Link>
           <span>Made for the people who make the day.</span>
           <a href="#main">Back to top ↑</a>
         </div>
