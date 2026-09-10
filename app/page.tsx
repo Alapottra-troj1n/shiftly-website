@@ -1,178 +1,508 @@
-/*
-  A starting point, not a landing page.
+import Image from "next/image";
+import {
+  AssistantDemo,
+  Header,
+  ProductTour,
+  Reveal,
+  ShiftChecklist,
+} from "./components/landing-interactions";
+import { Arrow, Icon } from "./components/icons";
+import "./landing.css";
 
-  This renders every piece of the design system on one screen — the washes,
-  the gradient text, the brand and status tints, the type ramp, the card and
-  button shapes — so the next person can see what they are working with
-  instead of reading a token list. Replace it wholesale when the real page
-  is built; nothing here is precious.
-
-  Two constraints that are NOT free to change, both from ../shiftly/PRODUCT.md:
-
-  1. Nothing may claim customers, testimonials, case studies, press or logos.
-     Shiftly AI is pre-launch with zero of each. The predecessor's published
-     figures (500+ businesses, 10k+ employees, 50k+ payrolls) belong to a
-     different product called AU Payroll and must not be restated, adapted,
-     or softened into a Shiftly claim.
-  2. It tracks hours, never pay. No payroll, no pay rates, no tax IDs. That
-     is a permanent product boundary and part of the positioning, not a gap
-     to write around.
-*/
-
-const TOKENS = [
-  { name: "canvas", value: "#fcfbf7", note: "the page" },
-  { name: "surface", value: "#ffffff", note: "cards" },
-  { name: "ink", value: "#121214", note: "body copy" },
-  { name: "ink-soft", value: "#5b5b64", note: "secondary" },
-  { name: "brand", value: "#6d4df0", note: "the violet" },
-  { name: "brand-deep", value: "#4a2fbd", note: "on tint" },
+const SIGN_UP = "https://app.joinshiftly.com/sign-up";
+const questions = [
+  {
+    question: "Who is Shiftly AI for?",
+    answer:
+      "Owners, managers and teams at small venues: cafés, bars and independent shops. You plan the week and review the day; your team sees their shifts and the work that belongs to them.",
+  },
+  {
+    question: "Does everyone need a computer?",
+    answer:
+      "Your team can see shifts, complete checklists and submit logs from a phone. A shared tablet at the counter handles PIN clock-ins and visitor sign-ins. Owners and managers can work from a phone or desktop.",
+  },
+  {
+    question: "What can I ask the Assistant to do?",
+    answer:
+      "Owners and managers can ask about the day, prepare a roster and handle supported requests. The Assistant uses your permissions, the same actions as the app and the same approval rules. Privileged changes leave an audit trail.",
+  },
+  {
+    question: "Can I export my team's hours?",
+    answer:
+      "Yes. Clock-ins feed into an hours summary, with a correction and review flow when something needs fixing. You can export the hours as CSV and use them in your existing process. Shiftly AI records time; it does not calculate pay.",
+  },
+  {
+    question: "What does joining early mean?",
+    answer:
+      "Shiftly AI is pre-launch. You can create a venue account to explore the product as it develops. Pricing and launch plans are still being finalised; there are no published trial or pricing terms yet.",
+  },
 ];
-
-const STATUS = [
-  { name: "good", tint: "bg-good-soft", ink: "text-good" },
-  { name: "warn", tint: "bg-warn-soft", ink: "text-warn" },
-  { name: "info", tint: "bg-info-soft", ink: "text-info" },
-  { name: "alarm", tint: "bg-alarm-soft", ink: "text-alarm" },
-  { name: "quiet", tint: "bg-quiet-soft", ink: "text-quiet" },
-];
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="mt-16">
-      <h2 className="text-sm font-bold uppercase tracking-widest text-ink-faint">{title}</h2>
-      <div className="mt-5">{children}</div>
-    </section>
-  );
-}
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-5xl px-6 py-20 sm:px-8">
-      {/* ==================== the hero shape ==================== */}
-      <div className="rise">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-deep">
-          Shiftly AI
-        </p>
-        <h1 className="mt-4 text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
-          Run your venue&rsquo;s <span className="text-wash">whole day</span>.
-        </h1>
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
-          Rosters, shift checklists, stock ordering and compliance logs in one app.
-          The shift is the unit — and you can ask it instead of clicking it.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <a
-            href="https://app.joinshiftly.com/sign-up"
-            className="rounded-full wash-brand px-6 py-3 text-[0.9375rem] font-semibold text-white shadow-raised transition hover:opacity-95"
-          >
-            Get your venue running
-          </a>
-          <a
-            href="https://app.joinshiftly.com/sign-in"
-            className="font-semibold text-ink underline decoration-line-strong underline-offset-4 transition hover:decoration-ink"
-          >
-            Sign in
-          </a>
-        </div>
-      </div>
-
-      {/* ==================== the washes ==================== */}
-      <Section title="Washes — atmosphere, never meaning">
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            { cls: "wash-warm", label: "wash-warm" },
-            { cls: "wash-cool", label: "wash-cool" },
-            { cls: "wash-brand", label: "wash-brand", dark: true },
-          ].map((w) => (
-            <div
-              key={w.label}
-              className={`${w.cls} flex h-32 items-end rounded-lg border border-line p-4 shadow-card`}
-            >
-              <code className={`text-sm font-semibold ${w.dark ? "text-white" : "text-ink-soft"}`}>
-                {w.label}
-              </code>
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <Header />
+      <main id="main">
+        <section className="hero container" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <div className="eyebrow hero-eyebrow">
+              <span className="tiny-sun" aria-hidden="true">
+                ✳
+              </span>{" "}
+              A warmer working day
             </div>
-          ))}
-        </div>
-        <div className="wash-ai mt-4 flex h-20 items-end rounded-lg p-4 shadow-card">
-          <code className="text-sm font-semibold text-white">
-            wash-ai — the assistant&rsquo;s own line, violet into rose
-          </code>
-        </div>
-      </Section>
-
-      {/* ==================== colour ==================== */}
-      <Section title="Colour">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {TOKENS.map((t) => (
-            <div
-              key={t.name}
-              className="flex items-center gap-4 rounded-lg border border-line bg-surface p-3 shadow-card"
-            >
-              <span
-                aria-hidden
-                className="h-11 w-11 shrink-0 rounded-md border border-line"
-                style={{ background: t.value }}
-              />
-              <span className="min-w-0">
-                <code className="block text-sm font-bold">{t.name}</code>
-                <span className="block text-sm text-ink-soft">
-                  {t.value} · {t.note}
+            <h1 id="hero-title">
+              Your whole shift.
+              <br />
+              <span className="hero-accent">In one place.</span>
+            </h1>
+            <p className="hero-description">
+              Plan the roster. Keep tasks and logs with each shift. Track the
+              hours. And when you need a hand, just ask Shiftly AI.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href={SIGN_UP}>
+                Join the founding venues <Arrow />
+              </a>
+              <a className="text-link" href="#how-it-works">
+                See how a shift works{" "}
+                <span className="play-icon">
+                  <Icon name="play" />
                 </span>
+              </a>
+            </div>
+            <p className="hero-note">
+              <span className="small-dot" /> Built for small venues. Open to
+              early explorers.
+            </p>
+          </div>
+          <div className="hero-art">
+            <Image
+              src="/brand/shift-objects.png"
+              alt="A warm ceramic schedule, checklist and stock box, connected by a peach ribbon beside a coffee cup."
+              width={1536}
+              height={1024}
+              preload
+              sizes="(max-width: 700px) 100vw, 780px"
+            />
+            <div className="art-note">
+              <span className="note-stroke" aria-hidden="true" /> All the little
+              things,
+              <br />
+              together at last.
+            </div>
+          </div>
+        </section>
+        <div className="audience-strip container">
+          <p>For the places that make a neighbourhood.</p>
+          <div className="audience-types">
+            <span>
+              <Icon name="coffee" /> Cafés
+            </span>
+            <span>
+              <Icon name="glass" /> Bars
+            </span>
+            <span>
+              <Icon name="store" /> Independent shops
+            </span>
+          </div>
+        </div>
+        <section
+          className="section container tour-section"
+          id="how-it-works"
+          aria-labelledby="tour-title"
+        >
+          <Reveal className="section-heading centered">
+            <p className="eyebrow">From the first shift to the last check</p>
+            <h2 id="tour-title">One shift. Everything connected.</h2>
+            <p>
+              A clear plan for you. A clear day for your team.
+              <br className="desktop-break" /> The work stays together, from
+              roster to clock-out.
+            </p>
+          </Reveal>
+          <Reveal>
+            <ProductTour />
+          </Reveal>
+        </section>
+        <section
+          className="section features-section"
+          id="features"
+          aria-labelledby="features-title"
+        >
+          <div className="container">
+            <Reveal className="features-intro">
+              <div className="section-heading">
+                <p className="eyebrow">Less to chase. More room to breathe.</p>
+                <h2 id="features-title">
+                  The little things
+                  <br />
+                  make the whole day.
+                </h2>
+              </div>
+              <p className="section-lead">
+                The opening checks. The stock order. The fridge log. Give every
+                shift its own list, so everyone knows what needs doing.
+              </p>
+            </Reveal>
+            <div className="feature-grid">
+              <Reveal className="feature-card checklist-feature">
+                <div className="feature-icon peach">
+                  <Icon name="checklist" />
+                </div>
+                <h3>
+                  The right tasks.
+                  <br />
+                  The right shift.
+                </h3>
+                <p>
+                  Opening or closing, your team sees the checklist for the shift
+                  they are working.
+                </p>
+                <ShiftChecklist />
+              </Reveal>
+              <Reveal className="feature-card">
+                <div className="feature-icon lilac">
+                  <Icon name="box" />
+                </div>
+                <h3>
+                  A stock check.
+                  <br />
+                  An order ready.
+                </h3>
+                <p>
+                  See suggested quantities from your stock levels. Submit the
+                  day’s order by category.
+                </p>
+                <div className="stock-example" aria-label="Example stock order">
+                  <div className="mini-label">
+                    <span>Today’s order</span>
+                    <span className="soft-tag">Produce</span>
+                  </div>
+                  <div className="stock-row">
+                    <span className="produce-icon tomato" aria-hidden="true">
+                      ●
+                    </span>
+                    <span>
+                      Tomatoes<small>Suggested order</small>
+                    </span>
+                    <strong>
+                      4 <small>boxes</small>
+                    </strong>
+                  </div>
+                  <div className="stock-row">
+                    <span className="produce-icon leaf" aria-hidden="true">
+                      <Icon name="leaf" />
+                    </span>
+                    <span>
+                      Salad leaves<small>Suggested order</small>
+                    </span>
+                    <strong>
+                      6 <small>bags</small>
+                    </strong>
+                  </div>
+                  <p className="example-label">
+                    Illustrative example · independent shop
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal className="feature-card">
+                <div className="feature-icon rose">
+                  <Icon name="clipboard" />
+                </div>
+                <h3>
+                  Checks on the shift.
+                  <br />
+                  Records in one place.
+                </h3>
+                <p>
+                  Keep temperatures, photos and safety checks with the work.
+                  Ready for your review.
+                </p>
+                <div className="log-example">
+                  <div className="mini-label">
+                    <span>
+                      <Icon name="thermometer" /> Fridge check
+                    </span>
+                    <span className="soft-tag">Bar opening</span>
+                  </div>
+                  <div className="temperature">
+                    3.2<span>°C</span>
+                    <span className="recorded">
+                      <Icon name="check" /> Recorded
+                    </span>
+                  </div>
+                  <div className="log-footer">
+                    <span>Recorded by Alex</span>
+                    <span>09:04</span>
+                  </div>
+                  <p className="example-label">Illustrative example · bar</p>
+                </div>
+              </Reveal>
+            </div>
+            <Reveal className="completion-note">
+              <Icon name="shield" />
+              <p>
+                <strong>A shift carries its responsibilities.</strong> Required
+                checklist work must be resolved before clock-out.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+        <section
+          className="section container decisions-section"
+          aria-labelledby="decisions-title"
+        >
+          <Reveal className="decision-visual">
+            <div className="decision-heading">
+              <span className="feature-icon lilac">
+                <Icon name="swap" />
+              </span>
+              <div>
+                <strong>A shift swap to review</strong>
+                <span>Example venue data</span>
+              </div>
+              <span className="soft-tag">Waiting</span>
+            </div>
+            <div className="people-swap">
+              <div>
+                <span className="avatar mint">MO</span>
+                <strong>Maya</strong>
+                <span>Requests a hand-off</span>
+              </div>
+              <Icon name="swap" />
+              <div>
+                <span className="avatar lilac">JP</span>
+                <strong>Jonas</strong>
+                <span>Would take the shift</span>
+              </div>
+            </div>
+            <div className="swap-detail">
+              <Icon name="calendar" />
+              <div>
+                <strong>Sunday · 07:00–15:00</strong>
+                <span>Counter shift</span>
+              </div>
+            </div>
+            <p className="decision-consequence">
+              Approving reassigns this shift to Jonas. You see the change before
+              you decide.
+            </p>
+          </Reveal>
+          <Reveal className="section-heading decision-copy">
+            <p className="eyebrow">Your attention, in the right place</p>
+            <h2 id="decisions-title">
+              One place for
+              <br />
+              “can you check this?”
+            </h2>
+            <p>
+              A shift swap. A change to the hours. A log to review. See what is
+              waiting, who is asking, and what your decision will change.
+            </p>
+            <a className="text-link" href="#assistant">
+              Or ask your Assistant to help <Arrow />
+            </a>
+          </Reveal>
+        </section>
+        <section
+          className="assistant-section"
+          id="assistant"
+          aria-labelledby="assistant-title"
+        >
+          <div className="container assistant-layout">
+            <Reveal className="assistant-copy section-heading">
+              <p className="eyebrow">
+                <Icon name="sparkles" /> Meet your extra pair of hands
+              </p>
+              <h2 id="assistant-title">
+                A little less clicking.
+                <br />
+                Just ask.
+              </h2>
+              <p>
+                Prepare next week’s roster. See what needs you today. Ask
+                Shiftly AI in plain words, and keep your attention on your
+                venue.
+              </p>
+              <div className="sunny-introduction">
+                <Image
+                  src="/brand/sunny-studio.png"
+                  alt="Sunny, the smiling peach and lilac folded shift card."
+                  width={1280}
+                  height={1280}
+                  sizes="180px"
+                />
+                <span>
+                  A little help.
+                  <br />A warmer day.
+                  <span className="sunny-underline" aria-hidden="true" />
+                </span>
+              </div>
+            </Reveal>
+            <Reveal>
+              <AssistantDemo />
+            </Reveal>
+            <Reveal className="assistant-trust">
+              <Icon name="shield" />
+              <p>
+                <strong>
+                  Same permissions. Same actions. Same audit trail.
+                </strong>
+                <span>
+                  For owners and managers. Asking is a way in, never a way
+                  around.
+                </span>
+              </p>
+            </Reveal>
+          </div>
+        </section>
+        <section
+          className="section container hours-section"
+          aria-labelledby="hours-title"
+        >
+          <Reveal className="section-heading">
+            <p className="eyebrow">From clock-in to a clear record</p>
+            <h2 id="hours-title">
+              The day is done.
+              <br />
+              The hours add up.
+            </h2>
+            <p>
+              Clock in at the counter. Review corrections with the reason
+              attached. Export your team’s hours into the process you already
+              use.
+            </p>
+            <div className="hours-benefits">
+              <span>
+                <Icon name="check" /> PIN clock-in on a shared tablet
+              </span>
+              <span>
+                <Icon name="check" /> Corrections with a clear record
+              </span>
+              <span>
+                <Icon name="check" /> Hours ready to export as CSV
               </span>
             </div>
-          ))}
-        </div>
-
-        <p className="mt-6 text-[0.9375rem] text-ink-soft">
-          Status tints. Each pairs with an ink that clears AA on it, and the words
-          carry the state — colour never does the work on its own.
-        </p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {STATUS.map((s) => (
-            <span
-              key={s.name}
-              className={`${s.tint} ${s.ink} rounded-full px-3.5 py-1.5 text-sm font-semibold`}
-            >
-              {s.name}
+          </Reveal>
+          <Reveal className="hours-visual">
+            <div className="hours-card">
+              <div className="mini-label">
+                <span>
+                  <Icon name="clock" /> A shift in hours
+                </span>
+                <span className="soft-tag">Example</span>
+              </div>
+              <div className="hours-total">
+                7<span>h</span> 35<span>m</span>
+              </div>
+              <p>Time worked, with the break taken out.</p>
+              <div className="time-track">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="time-points">
+                <div>
+                  <strong>06:57</strong>
+                  <span>Clocked in</span>
+                </div>
+                <div>
+                  <strong>30 min</strong>
+                  <span>Break</span>
+                </div>
+                <div>
+                  <strong>15:02</strong>
+                  <span>Clocked out</span>
+                </div>
+              </div>
+              <div className="export-note">
+                <Icon name="file" />
+                <span>Clear hours. Your existing process.</span>
+                <Icon name="check" />
+              </div>
+            </div>
+          </Reveal>
+        </section>
+        <section
+          className="section container faq-section"
+          id="questions"
+          aria-labelledby="faq-title"
+        >
+          <Reveal className="section-heading">
+            <p className="eyebrow">A few things you might be wondering</p>
+            <h2 id="faq-title">
+              Good questions.
+              <br />
+              Straight answers.
+            </h2>
+          </Reveal>
+          <Reveal className="faq-list">
+            {questions.map(({ question, answer }) => (
+              <details key={question}>
+                <summary>
+                  {question}
+                  <span className="faq-plus" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </Reveal>
+        </section>
+        <section
+          className="founding-section container"
+          id="join"
+          aria-labelledby="join-title"
+        >
+          <Reveal className="founding-card">
+            <span className="founding-symbol" aria-hidden="true">
+              ✳
             </span>
-          ))}
+            <p className="eyebrow">Small venues. A new beginning.</p>
+            <h2 id="join-title">
+              Make room for
+              <br />a warmer working day.
+            </h2>
+            <p>
+              We’re building Shiftly AI for places like yours.
+              <br />
+              Get in early and help shape what comes next.
+            </p>
+            <a className="button button-primary" href={SIGN_UP}>
+              Join the founding venues <Arrow />
+            </a>
+            <span className="founding-note">
+              Pre-launch · Come explore with us
+            </span>
+          </Reveal>
+        </section>
+      </main>
+      <footer className="site-footer container">
+        <div className="footer-top">
+          <a href="#" aria-label="Shiftly AI home">
+            <Image
+              src="/brand/lockup-primary.svg"
+              alt="Shiftly AI"
+              width={175}
+              height={43}
+            />
+          </a>
+          <p>A little more together. A little less to chase.</p>
+          <a href="https://app.joinshiftly.com/sign-in" className="text-link">
+            Sign in <Arrow />
+          </a>
         </div>
-      </Section>
-
-      {/* ==================== type ==================== */}
-      <Section title="Type — Figtree, self-hosted">
-        <div className="space-y-3 rounded-lg border border-line bg-surface p-6 shadow-card">
-          <p className="text-5xl font-extrabold leading-[1.05] tracking-tight">Hero, 48/60px</p>
-          <p className="text-3xl font-extrabold tracking-tight">Section heading, 30px</p>
-          <p className="text-lg text-ink-soft">Lead paragraph, 18px, ink-soft.</p>
-          <p className="text-[0.9375rem] leading-relaxed">
-            Body copy sits at 15px. Plain, direct, second person, in plain international
-            English — the app&rsquo;s voice, and the site should not adopt a louder one just
-            because it is marketing. State the consequence rather than warning vaguely.
-          </p>
-          <p className="text-sm text-ink-faint">Small print, 14px, ink-faint.</p>
+        <div className="footer-bottom">
+          <span>© 2026 Shiftly AI</span>
+          <span>Made for the people who make the day.</span>
+          <a href="#main">Back to top ↑</a>
         </div>
-      </Section>
-
-      {/* ==================== what to build ==================== */}
-      <Section title="What goes here next">
-        <div className="wash-cool rounded-lg border border-line p-6 shadow-card sm:p-8">
-          <p className="text-[0.9375rem] leading-relaxed text-ink">
-            The brand mark, the AI mascot and the illustration set are being made
-            separately and are not in this repo yet. Drop them in{" "}
-            <code className="rounded bg-surface px-1.5 py-0.5 text-sm">public/</code> and
-            wire the favicon in{" "}
-            <code className="rounded bg-surface px-1.5 py-0.5 text-sm">app/layout.tsx</code>{" "}
-            where the TODO is.
-          </p>
-          <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink">
-            Read <code className="rounded bg-surface px-1.5 py-0.5 text-sm">CONTEXT.md</code>{" "}
-            before writing copy. It carries the two rules that are easy to break by
-            accident: no invented social proof, and hours never pay.
-          </p>
-        </div>
-      </Section>
-    </main>
+      </footer>
+    </>
   );
 }

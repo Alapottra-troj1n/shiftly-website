@@ -76,8 +76,8 @@ because it is marketing.
 see the comment at the top of that file. The app is the source of truth for anything
 appearing in both; if a token changes there, change it here.
 
-- **Type:** Figtree, self-hosted via `next/font` (no run-time request to Google, and
-  no font host to add to a CSP later).
+- **Type:** Figtree, bundled in `app/fonts/` with its SIL licence and loaded via
+  `next/font/local`. No build-time or run-time request to Google.
 - **Ground:** a warm white canvas (`#fcfbf7`), white cards, hairline borders.
 - **Brand:** a warm violet, `#6d4df0`.
 - **Washes:** `wash-warm`, `wash-cool`, `wash-brand`, `wash-ai` — soft three-stop
@@ -94,14 +94,23 @@ one-handed mid-shift. Same family, different job.
 
 ## Brand assets
 
-The logo, the AI mascot and the illustration set are being made separately and are not
-here yet. When they land:
+The supplied September 2026 brand kit is now used on the landing page:
 
-- put them in `public/`
-- wire the favicon and apple-touch-icon at the TODO in `app/layout.tsx`
-- the app has placeholder icons of its own (`../shiftly/public/icons/`, a generic
-  calendar glyph explicitly marked as a stand-in with zero brand equity) — replace
-  those at the same time so the two stay in step
+- `public/brand/`: the folded-card logo, app icons, Sunny and the connected-shift
+  illustration. Favicons and the apple-touch icon are wired in `app/layout.tsx`.
+- `public/screenshots/`: five supplied product captures, shown as example venue data.
+- `app/landing.css`: marketing-only Paper, Ink and Dawn surfaces from the brand guide.
+  Shared app tokens remain in `app/globals.css` without changes.
+- `app/components/landing-interactions.tsx`: the product tour, screenshot viewer,
+  example checklist, scripted Assistant examples and reduced-motion-aware reveals.
+
+The full marketing wordmark is **Shiftly AI**. Sunny is the Assistant companion,
+not the logo. Illustrations add atmosphere; product captures demonstrate the UI.
+The sibling product repository remains read-only; its branding has not been changed.
+
+Signup links use `https://app.joinshiftly.com/sign-up`; sign-in links use
+`https://app.joinshiftly.com/sign-in`. The landing page does not collect emails or
+simulate a completed signup. Interactive examples change only local page state.
 
 ## Running it
 

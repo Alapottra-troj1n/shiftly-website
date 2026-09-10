@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 /*
-  The same typeface as the app, self-hosted by next/font at build time — no
-  request to Google at run time, and no font host to add to a CSP later.
+  The supplied brand font is bundled locally, including its SIL licence.
+  Neither builds nor browsers need to contact a font host.
 */
-const figtree = Figtree({
+const figtree = localFont({
+  src: "./fonts/figtree-latin.woff2",
   variable: "--font-figtree",
-  subsets: ["latin"],
+  weight: "300 900",
+  display: "swap",
 });
 
 const SITE = "https://joinshiftly.com";
@@ -16,31 +18,39 @@ const SITE = "https://joinshiftly.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Shiftly AI — run your venue's whole day",
+    default: "Shiftly AI — Your whole shift. In one place.",
     template: "%s · Shiftly AI",
   },
-  /*
-    Unlike the app, this site exists to be found. Every page wants a real
-    title and description; the defaults below are a starting point, not a
-    finished proposition — rewrite them when the positioning is settled.
-  */
   description:
-    "Rosters, shift checklists, stock ordering and compliance logs for small venues. The shift is the unit, and you can ask it instead of clicking it.",
+    "Plan the roster, keep tasks and logs with each shift, and track the hours. A warmer working day for cafés, bars and independent shops. Just ask Shiftly AI.",
   openGraph: {
     type: "website",
     siteName: "Shiftly AI",
     url: SITE,
+    title: "Shiftly AI — Your whole shift. In one place.",
+    description:
+      "A clear plan for you. A clear day for your team. Rosters, tasks, logs and hours, together with a helping hand from AI.",
   },
   twitter: { card: "summary_large_image" },
-  // TODO: replace when the brand mark and mascot land.
-  // icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+  icons: {
+    icon: [
+      { url: "/brand/app-icon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/brand/app-icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/mark-primary.svg", type: "image/svg+xml" },
+    ],
+    apple: "/brand/app-icon-180.png",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fcfbf7",
+  themeColor: "#faf8f6",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={figtree.variable}>
       <body>{children}</body>
