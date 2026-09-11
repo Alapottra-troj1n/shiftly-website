@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL, pageMetadata } from "./lib/seo";
 import { Brand } from "./components/mascot";
+import { ShiftComparison } from "./components/shift-comparison";
 import {
   AssistantDemo,
+  FAQ,
   Header,
   ProductTour,
   Reveal,
@@ -462,6 +464,7 @@ export default function Home() {
             </div>
           </Reveal>
         </section>
+        <ShiftComparison />
         <section
           className="section container faq-section"
           id="questions"
@@ -475,19 +478,7 @@ export default function Home() {
               Straight answers.
             </h2>
           </Reveal>
-          <Reveal className="faq-list">
-            {questions.map(({ question, answer }) => (
-              <details key={question}>
-                <summary>
-                  {question}
-                  <span className="faq-plus" aria-hidden="true">
-                    +
-                  </span>
-                </summary>
-                <p>{answer}</p>
-              </details>
-            ))}
-          </Reveal>
+          <FAQ items={questions} />
         </section>
         <section
           className="founding-section container"

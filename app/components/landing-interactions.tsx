@@ -124,6 +124,64 @@ export function Reveal({
   );
 }
 
+export function FAQ({
+  items,
+}: {
+  items: ReadonlyArray<{ question: string; answer: string }>;
+}) {
+  const [openItems, setOpenItems] = useState<ReadonlySet<number>>(
+    () => new Set([0]),
+  );
+
+  function toggleItem(index: number) {
+    setOpenItems((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  }
+
+  return (
+    <Reveal className="faq-list">
+      {items.map(({ question, answer }, index) => {
+        const open = openItems.has(index);
+        const questionId = `faq-question-${index}`;
+        const answerId = `faq-answer-${index}`;
+
+        return (
+          <div className={`faq-item${open ? " is-open" : ""}`} key={question}>
+            <button
+              className="faq-question"
+              type="button"
+              id={questionId}
+              aria-expanded={open}
+              aria-controls={answerId}
+              onClick={() => toggleItem(index)}
+            >
+              <span>{question}</span>
+              <span className="faq-plus" aria-hidden="true">
+                +
+              </span>
+            </button>
+            <div
+              className="faq-answer"
+              id={answerId}
+              role="region"
+              aria-labelledby={questionId}
+              aria-hidden={!open}
+            >
+              <div>
+                <p>{answer}</p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </Reveal>
+  );
+}
+
 const tourSteps = [
   {
     label: "Plan the week",

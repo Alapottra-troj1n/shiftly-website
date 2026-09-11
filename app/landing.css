@@ -1352,11 +1352,17 @@ a {
 .faq-list {
   border-top: 1px solid var(--rule);
 }
-.faq-list details {
+.faq-item {
   border-bottom: 1px solid var(--rule);
 }
-.faq-list summary {
-  list-style: none;
+.faq-question {
+  appearance: none;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1367,26 +1373,47 @@ a {
   font-size: 15px;
   font-weight: 500;
 }
-.faq-list summary::-webkit-details-marker {
-  display: none;
-}
 .faq-plus {
+  flex: 0 0 auto;
+  line-height: 1;
   font-size: 23px;
   font-weight: 300;
   color: #99897c;
-  transition: transform 0.25s;
+  transition: transform 0.3s var(--ease-soft);
 }
-.faq-list details[open] .faq-plus {
+.faq-item.is-open .faq-plus {
   transform: rotate(45deg);
 }
-.faq-list details > p {
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.35s var(--ease-soft),
+    opacity 0.2s ease,
+    visibility 0s linear 0.35s;
+}
+.faq-answer > div {
+  min-height: 0;
+  overflow: hidden;
+}
+.faq-answer p {
   font-size: 14px;
   color: var(--secondary);
   line-height: 1.75;
   padding: 0 32px 24px 0;
-  animation: preview-enter 0.2s both;
 }
-.faq-list summary:hover {
+.faq-item.is-open .faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows 0.35s var(--ease-soft),
+    opacity 0.25s ease 0.08s,
+    visibility 0s;
+}
+.faq-question:hover {
   color: var(--link);
 }
 .founding-section {
@@ -1888,7 +1915,7 @@ a {
   .faq-section .eyebrow {
     font-size: 8px;
   }
-  .faq-list summary {
+  .faq-question {
     font-size: 13px;
   }
 }
@@ -2346,11 +2373,11 @@ a {
   .faq-section .eyebrow {
     font-size: 9px;
   }
-  .faq-list summary {
+  .faq-question {
     min-height: 70px;
     font-size: 14px;
   }
-  .faq-list details > p {
+  .faq-answer p {
     font-size: 13px;
   }
   .founding-section {
@@ -2695,7 +2722,7 @@ a {
   .assistant-demo-header strong,
   .assistant-answer .response-title,
   .audience-types > span,
-  .faq-list summary,
+  .faq-question,
   .founding-card > p:not(.eyebrow),
   .pricing-included strong {
     font-size: 18px;
@@ -2747,10 +2774,10 @@ a {
   .tour-tabs {
     max-width: 960px;
   }
-  .faq-list summary {
+  .faq-question {
     min-height: 88px;
   }
-  .faq-list details > p {
+  .faq-answer p {
     font-size: 17px;
     max-width: 65ch;
   }
