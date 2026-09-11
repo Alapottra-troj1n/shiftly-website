@@ -2633,6 +2633,142 @@ a {
   .faq-section {
     padding-top: 48px;
   }
+
+  /* Scale the actual demo content too: wider cards alone leave their labels
+     at phone-sized 9–12px on a 1440p desktop. Keep secondary text at 13px. */
+  .example-label,
+  .stock-example > .example-label,
+  .soft-tag,
+  .stock-row small,
+  .stock-row strong small,
+  .temperature .recorded,
+  .log-footer,
+  .decision-heading > div > span,
+  .people-swap > div > span:last-child,
+  .swap-detail span,
+  .assistant-demo-header > div > span,
+  .demo-badge,
+  .assistant-answer .response-detail,
+  .assistant-prompt-area > p,
+  .assistant-demo-note,
+  .time-points span,
+  .export-note span,
+  .founding-note,
+  .footer-bottom,
+  .pricing-launch-note,
+  .step-number {
+    font-size: 13px;
+  }
+  .mini-label,
+  .hours-card .mini-label,
+  .assistant-result strong,
+  .prompt-options button,
+  .completion-note,
+  .assistant-trust p > span,
+  .hours-card > p,
+  .pricing-footnote {
+    font-size: 15px;
+  }
+  .checklist-items label,
+  .stock-row,
+  .people-swap strong,
+  .swap-detail strong,
+  .decision-consequence,
+  .user-message,
+  .assistant-answer > p,
+  .assistant-trust strong,
+  .time-points strong,
+  .tour-tabs button,
+  .capture-devices button,
+  .capture-expand,
+  .preview-dialog-header,
+  .audience-strip > p,
+  .text-link,
+  .footer-top > p,
+  .footer-top > a:last-child,
+  .pricing-period,
+  .pricing-promise,
+  .pricing-included li p {
+    font-size: 16px;
+  }
+  .decision-heading strong,
+  .assistant-demo-header strong,
+  .assistant-answer .response-title,
+  .audience-types > span,
+  .faq-list summary,
+  .founding-card > p:not(.eyebrow),
+  .pricing-included strong {
+    font-size: 18px;
+  }
+  .assistant-copy .eyebrow,
+  .founding-card .eyebrow {
+    font-size: 12px;
+  }
+  .checklist-example,
+  .stock-example,
+  .log-example {
+    padding: 20px 18px 16px;
+    min-height: 264px;
+  }
+  .checklist-items label {
+    min-height: 48px;
+  }
+  .stock-row {
+    min-height: 78px;
+  }
+  .stock-row strong {
+    font-size: 22px;
+  }
+  .decision-visual {
+    padding: 36px;
+  }
+  .people-swap {
+    margin-block: 36px;
+  }
+  .assistant-section {
+    padding-block: 112px 40px;
+  }
+  .assistant-demo-header {
+    padding: 24px 30px;
+  }
+  .assistant-conversation {
+    padding: 28px 30px 16px;
+    min-height: 340px;
+  }
+  .assistant-prompt-area {
+    padding: 16px 30px 22px;
+  }
+  .prompt-options {
+    gap: 10px;
+  }
+  .sunny-introduction > span {
+    transform: none;
+  }
+  .tour-tabs {
+    max-width: 960px;
+  }
+  .faq-list summary {
+    min-height: 88px;
+  }
+  .faq-list details > p {
+    font-size: 17px;
+    max-width: 65ch;
+  }
+  .founding-card {
+    padding-block: 72px;
+  }
+  .founding-card h2 {
+    font-size: 60px;
+  }
+  .pricing-card {
+    max-width: 1080px;
+  }
+  .pricing-included {
+    padding: 48px;
+  }
+  .pricing-promise {
+    max-width: 230px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

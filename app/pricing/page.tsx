@@ -10,6 +10,8 @@ export const metadata: Metadata = pageMetadata(
   "Pricing: US$10 per Venue per Month",
   "Explore Shiftly AI's US$10 per venue, per month plan: staff rosters, shift checklists, stock ordering, compliance logs, hours and an AI Assistant. Pre-launch.",
   "/pricing",
+  "/pricing/opengraph-image?v=2",
+  "Shiftly AI pricing - US$10 per venue, per month. One plan for your whole working day.",
 );
 
 const included = [
